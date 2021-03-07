@@ -4,6 +4,8 @@ require_once './libraries/models/Model.php';
 
 class Comment extends Model
 {
+    protected $table = 'comments';
+
     /**
      * Retouve la liste des commentaires d'un article donné
      *
@@ -20,33 +22,6 @@ class Comment extends Model
         $commentaires = $query->fetchAll();
 
         return $commentaires;
-    }
-
-    /**
-     * Retourne un commentaire de la base de données grace a son identifiant
-     *
-     * @param integer $id
-     * @return array/bool le commentaire si on le trouve, false si on ne le trouve pas
-     */
-    function find(int $id)
-    {
-        $query = $this->pdo->prepare('SELECT * FROM comments WHERE id = :id');
-        $query->execute(['id' => $id]);
-        $comment = $query->fetch();
-
-        return $comment;
-    }
-
-    /**
-     * Supprime un commentaire grace a son identifiant
-     *
-     * @param integer $id
-     * @return void
-     */
-    public function delete(int $id): void
-    {
-        $query = $this->pdo->prepare('DELETE FROM comments WHERE id = :id');
-        $query->execute(['id' => $id]);
     }
 
     /**
