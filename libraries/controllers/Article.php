@@ -1,7 +1,6 @@
 <?php
 
 namespace Controllers;
-require_once './libraries/utils.php';
 
 class Article extends Controller
 {
@@ -19,7 +18,7 @@ class Article extends Controller
          * 3. Affichage
          */
         $pageTitle = 'Accueil';
-        render('./articles/index', compact('pageTitle', 'articles'));
+        \Renderer::render('./articles/index', compact('pageTitle', 'articles'));
     }
 
     // Montrer UN article
@@ -60,7 +59,7 @@ class Article extends Controller
          */
         $pageTitle = $article['title'];
 
-        render(
+        \Renderer::render(
             './articles/show',
             compact('pageTitle', 'article', 'commentaires', 'article_id')
         );
@@ -101,6 +100,6 @@ class Article extends Controller
         /**
          * 5. Redirection vers la page d'accueil
          */
-        redirect('index.php');
+        \Http::redirect('index.php');
     }
 }
