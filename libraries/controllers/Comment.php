@@ -52,7 +52,9 @@ class Comment extends Controller
         $this->model->insert($author, $content, $article_id);
 
         // 4. Redirection vers l'article en question :
-        \Http::redirect('article.php?id=' . $article_id);
+        \Http::redirect(
+            'index.php?controller=article&task=show&id=' . $article_id
+        );
     }
 
     //Supprime un commentaire
@@ -85,6 +87,8 @@ class Comment extends Controller
         /**
          * 5. Redirection vers l'article en question
          */
-        \Http::redirect('article.php?id=' . $article_id);
+        \Http::redirect(
+            'index.php?controller=article&task=show&id=' . $article_id
+        );
     }
 }
