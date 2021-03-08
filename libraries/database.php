@@ -2,6 +2,7 @@
 
 class Database
 {
+    private static $instance = null;
     /**
      * Retourne une connexio a la base de données
      *
@@ -9,16 +10,18 @@ class Database
      */
     public static function getPdo(): PDO
     {
-        $pdo = new PDO(
-            'mysql:host=localhost;dbname=blogpoo;charset=utf8',
-            'root',
-            '',
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            ]
-        );
+        if (self::$instance === null) {
+            self::$instance = new PDO(
+                'mysql:host=localhost;dbname=blogpoo;charset=utf8',
+                'root',
+                '',
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                ]
+            );
+        }
 
-        return $pdo;
+        return self::$instance;
     }
 }
